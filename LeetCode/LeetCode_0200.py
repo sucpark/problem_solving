@@ -1,32 +1,35 @@
 """
 200. Number of Islands (medium)
 
-1) BFS
+1) use dfs
+2) when I use bfs (use deque() and q.popleft()), time limit exceed
 
 """
 
-from collections import deque
 
+# from collections import deque
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
 
-        row, col = len(grid), len(grid[0])
-        cnt = 0
-        check = [[0]*col for _ in range(row)] # [[0] * col]*row does not work -> it copies the list
-        q = deque()
+        r,c = len(grid), len(grid[0])
+        q = [] # deque()
+        sol = 0
 
-        for i in range(row):
-            for j in range(col):
-                if (grid[i][j] == "1") and (check[i][j] == 0): # starting point of island
+        visited = [[0]*c for _ in range(r)]
+
+        for i in range(r):
+            for j in range(c):
+                if grid[i][j] == '1' and visited[i][j] == 0:
                     q.append((i,j))
                     while q:
-                        x, y = q.popleft()
-                        check[x][y] = 1
-                        print(f"{x} and {y} are visited")
-                        for dx, dy in (0,-1), (0,1), (-1,0), (1,0):
-                            xx, yy = x+dx, y+dy
-                            if (0 <= xx < row) and (0 <= yy < col) and (grid[xx][yy] == '1') and (check[xx][yy] == 0):
-                                q.append((xx,yy))
-                    cnt += 1
+                        x, y = q.pop()  # q.popleft()
+                        visited[x][y] = 1
 
-        return cnt
+                        for dx, dy in [(-1,0), (1,0), (0,-1), (0,1)]:
+                            nx, ny = x+dx, y+dy
+
+                            if (0 <= nx < r) and (0 <= ny < c) and (grid[nx][ny] == '1') and (visited[nx][ny] == 0):
+                                q.append((nx, ny))
+                    sol += 1
+        return sol
+
