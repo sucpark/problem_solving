@@ -23,7 +23,7 @@ def solution(n, edge):
     visited = [False for _ in range(n)]
     distance = [0]
 
-    queue = deque([(1,0)])  # (node, distance)
+    queue = deque([(1, 0)])  # (node, distance)
     visited[0] = True
     while queue:
         n, d = queue.popleft()
