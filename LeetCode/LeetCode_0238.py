@@ -27,3 +27,24 @@ class Solution:
         #     sol = [j * v for j in sol]
         #     sol[i] = temp
         return sol
+
+"""
+2021.12.08
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        
+        p = 1
+        sol = []
+        for i in range(len(nums)):
+            sol.append(p)
+            p *= nums[i]
+        
+        p = 1
+        for j in range(len(nums)-1, 0-1, -1):
+            sol[j] *= p
+            p *= nums[j]
+        
+        return sol
+
+"""
