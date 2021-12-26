@@ -1,6 +1,8 @@
 """
 2085. Count Common Words With One Occurrence (Easy)
 
+1) use list.count()
+2) use collection Counter()
 """
 
 
